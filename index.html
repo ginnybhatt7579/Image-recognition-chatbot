@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Description Chatbot</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.chat-container {
+    width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat-header {
+    padding: 15px;
+    background: #4CAF50;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+}
+
+.chat-box {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #549ab6;
+}
+
+.chat-message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    clear: both;
+}
+
+.chat-message.user {
+    background: #060e0000;
+    align-self: flex-end;
+}
+
+.chat-message.bot {
+    background: #000000;
+    align-self: flex-start;
+}
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+#user-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+#send-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#send-btn:hover {
+    background: #45a049;
+}
+
+.custom-file-upload {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    color: #666;
+    border-radius: 50%;
+}
+
+.custom-file-upload:hover {
+    color: #333;
+}
+.marquee-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color:bisque;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #ff1d58;;
+    height: 40px;
+    font-size: 30px;
+  }
+  
+  .marquee-content {
+    display: inline-block;
+    padding-left: 100%; 
+    animation: marquee 20s linear infinite; 
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+.headbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: bisque;
+    white-space: nowrap;
+    overflow: hidden;
+    color:green;
+    height: 40px;
+    font-size: 30px;
+}
+.head{
+    display: inline-block;
+    padding-left: 100%; 
+    animation: marquee 20s linear infinite; 
+}
+@keyframes head {
+    0%{
+        transform: translate(0);
+    }
+    100%{
+        transform: translate(-100%);
+    }
+    
+}
+
+        .chat-container {
+            width: 450px;
+            background-color: #29293d;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .chat-box {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            max-height: 500px;
+            border-bottom: 1px solid #ddd;
+        }
+        .chat-message {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: white;
+        }
+        .chat-message.user {
+            text-align: right;
+        }
+        .chat-message.bot {
+            text-align: left;
+        }
+        .chat-input {
+            display: flex;
+            padding: 10px;
+            background-color: #3d3d5c;
+        }
+        #user-input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        #send-btn, #upload-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #send-btn:hover, #upload-btn:hover {
+            background-color: #45a049;
+        }
+        #file-input {
+            display: none;
+        }
+        .uploaded-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .chat-box::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-box::-webkit-scrollbar-track {
+            background: #3d3d5c;
+        }
+        .chat-box::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 5px;
+        }
+        .chat-box::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">
+        Image Description Chatbot
+    </div>
+    <div class="chat-box" id="chat-box">
+        <!-- Chat messages will appear here -->
+    </div>
+    <div class="chat-input">
+        <input type="file" id="file-input" accept="image/jpeg">
+        <button id="upload-btn">Upload Image</button>
+        <input type="text" id="user-input" placeholder="Type a message..." autofocus>
+        <button id="send-btn">Send</button>
+    </div>
+</div>
+<div class="marquee-container">
+    <div class="marquee-content">
+      IMAGE-RECOGNISATION CHATBOT DEVELOPED BY TEAM WHITE FANG ...
+    </div>
+  </div>
+  <div class="headbar">
+    <div class="head">
+        PROTOTYPE OF IMAGE SENSING CHATBOT
+    </div>
+  </div>
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const fileInput = document.getElementById('file-input');
+    const uploadBtn = document.getElementById('upload-btn');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    // Add message to chat
+    function addMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message', sender);
+        messageElement.innerText = message;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+    }
+
+    // Typing effect for bot's responses
+    function typeWriterEffect(sender, message, delay = 100) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message', sender);
+        chatBox.appendChild(messageElement);
+
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < message.length) {
+                messageElement.innerHTML += message.charAt(i);
+                i++;
+            } else {
+                clearInterval(interval);
+            }
+        }, delay);
+        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+    }
+
+    // Display the uploaded image in chat
+    function displayImage(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const imgElement = document.createElement('img');
+            imgElement.src = e.target.result;
+            imgElement.classList.add('uploaded-image', 'user');
+            chatBox.appendChild(imgElement);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Handle file upload and process file name
+    function processFileName(fileName) {
+        if (fileName === 'pic1.jpeg') {
+            typeWriterEffect('bot', 'This is a German Shepherd. German Shepherds are large-sized working dogs known for their intelligence and versatility.');
+        } else if (fileName === 'pic2.jpeg') {
+            typeWriterEffect('bot', 'This is a Husky. Huskies are medium-sized dogs famous for their endurance, friendly demeanor, and striking blue eyes.');
+        }else if (fileName === 'pic3.jpeg') {
+            typeWriterEffect('bot', 'This is a royal blue house** with a bold yet elegant charm. Its rich color stands out beautifully against natural surroundings, complemented by white-framed windows and a welcoming front door. The deep blue hue gives the home a serene, timeless appeal, blending sophistication with modern design.');
+        } else {
+            typeWriterEffect('bot', "Sorry, I need more traing to give you the answer. Thank you.");
+        }
+
+    }
+
+    uploadBtn.onclick = () => {
+        fileInput.click();
+    };
+
+    fileInput.onchange = () => {
+        const file = fileInput.files[0];
+        if (file) {
+            displayImage(file); // Show image instead of file name
+            setTimeout(() => {
+                processFileName(file.name); // Process the file name
+            }, 800); // Delay for a more realistic feel
+        }
+    };
+
+    // Handle sending a text message
+    sendBtn.onclick = () => {
+        const text = userInput.value.trim();
+        if (text) {
+            addMessage('user', text); // Add user's message to chat
+            const response = processInput(text); // Process input
+            setTimeout(() => {
+                addMessage('bot', response); // Bot's response
+            }, 800); // Delay for bot's response
+            userInput.value = ''; // Clear input field
+        }
+    };
+
+    // Allow pressing 'Enter' key to send a message
+    userInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            sendBtn.click();
+        }
+    });
+
+    // Process text input
+    function processInput(input) {
+        let response = '';
+        if (input.toLowerCase() === 'Hii') {
+            response = 'Hii welcome to the chat bot developed by White Fang';
+        } else if (input.toLowerCase() === 'How are you?') {
+            response = 'I am a bot, so I am always fine. How can I help you today?';
+        } else {
+            response = "I am not trained to answer that.Thank you.";
+        }
+        return response;
+    }
+</script>
+
+</body>
+</html>
